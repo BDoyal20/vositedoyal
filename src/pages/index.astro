@@ -33,7 +33,7 @@ const year = new Date().getFullYear();
       h1 { font-size: 3rem; margin: 0; letter-spacing: 0.5px; }
       .tag { color: var(--muted); font-size: 1.125rem; margin-top: 0.5rem; }
 
-      /* Headshot styling */
+      /* Headshot */
       .headshot-container {
         display: flex;
         justify-content: center;
@@ -41,8 +41,8 @@ const year = new Date().getFullYear();
         margin-bottom: 3rem;
       }
       .headshot {
-        width: 220px;
-        height: 220px;
+        width: 180px;
+        height: 180px;
         border-radius: 50%;
         border: 3px solid var(--brand);
         object-fit: cover;
@@ -106,6 +106,30 @@ const year = new Date().getFullYear();
         .list { grid-template-columns: 1fr 1fr; }
       }
       .li { padding: 0.75rem 1rem; border: 1px solid var(--line); border-radius: 12px; background: transparent; }
+
+      /* Social links */
+      .socials {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+      }
+      .socials a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+      }
+      .socials a:hover {
+        color: var(--brand);
+      }
+
+      .email {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 1rem;
+        color: var(--muted);
+      }
     </style>
   </head>
 
@@ -194,12 +218,24 @@ const year = new Date().getFullYear();
       <!-- Contact -->
       <section id="contact">
         <div class="section-title">Contact</div>
-        <div class="card stack">
-          <p class="muted">Project in mind or want a custom audition</p>
+        <div class="card stack" style="text-align:center;">
+          <p class="muted">Project in mind or want a custom audition?</p>
+
+          <div class="email">
+            📧 <a href="mailto:bailey.doyal0@gmail.com" style="color:var(--text);text-decoration:none;">bailey.doyal0@gmail.com</a>
+          </div>
+
           <div>
             <a class="btn" href="mailto:bailey.doyal0@gmail.com">Email Me</a>
           </div>
-          <p class="muted">Response within one business day.</p>
+
+          <div class="socials">
+            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">Twitter</a>
+            <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="#" target="_blank" rel="noopener noreferrer">More…</a>
+          </div>
+
+          <p class="muted" style="margin-top:0.75rem;">Response within one business day.</p>
         </div>
       </section>
     </main>
