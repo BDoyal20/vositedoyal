@@ -64,13 +64,13 @@ main { padding: 2rem 1rem; }
   border-radius: 0.6rem;            /* less rounded corners */
   max-width: 800px;                  /* narrower box width */
   margin: 0 auto;                    /* centered horizontally */
-  margin: 0.25rem 0;  /* small vertical margin to add extra space between cards */
+  margin: 2rem 0;  /* small vertical margin to add extra space between cards */
 }
 
 @media (max-width: 600px) {
   .demos-preview .demo-player {
     max-width: 100%;                 /* full width on mobile */
-    padding: 1rem;
+    padding: 2rem;
   }
 }
 /* Make demo cards vertical on the homepage */
@@ -80,8 +80,8 @@ main { padding: 2rem 1rem; }
   gap: 1.25rem;
   max-width: 600px;
   margin: 0 auto;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 @media (max-width: 900px) { .demos-grid { grid-template-columns: 1fr 1fr; } }
