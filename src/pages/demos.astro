@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import DemoPlayer from '../components/DemoPlayer.astro';
+---
+<BaseLayout title="Demos • Bailey Doyal" description="Listen to commercial, narration, character, and promo voice over demos.">
+  <Fragment slot="header">
+    <SiteHeader />
+  </Fragment>
+
+  <section class="container">
+    <h1>Demos</h1>
+    <div class="demos-list">
+      <DemoPlayer title="Commercial" src="/audio/commercial.mp3" />
+      <DemoPlayer title="Narration" src="/audio/narration.mp3" />
+      <DemoPlayer title="Character" src="/audio/character.mp3" />
+      <DemoPlayer title="Promo" src="/audio/promo.mp3" />
+    </div>
+  </section>
+
+  <Fragment slot="footer">
+    <SiteFooter />
+  </Fragment>
+</BaseLayout>
