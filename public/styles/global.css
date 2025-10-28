@@ -89,3 +89,129 @@ main { padding: 2rem 1rem; }
 .contact-form input, .contact-form textarea { background: var(--card); border: 1px solid var(--border); color: var(--text); border-radius: .5rem; padding: .6rem .7rem; }
 .contact-list { list-style: none; padding: 0; }
 .contact-list li { margin: .25rem 0; }
+
+/* Uniform demo player */
+.demo-player {
+  --radius: .75rem;
+  --pad: .75rem;
+  --gap: .75rem;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "toggle main stop";
+  align-items: center;
+  gap: var(--gap);
+  padding: var(--pad);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-height: 72px;
+}
+
+.demo-btn {
+  grid-area: toggle;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: .6rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 18px;
+  cursor: pointer;
+}
+.demo-btn.small {
+  grid-area: stop;
+  width: 36px;
+  height: 36px;
+  font-size: 14px;
+}
+
+.demo-main {
+  grid-area: main;
+  display: grid;
+  gap: .5rem;
+}
+
+.demo-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.demo-title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.demo-time {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  flex: 0 0 auto;
+}
+
+.demo-progress {
+  position: relative;
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.demo-bar {
+  position: absolute;
+  inset: 0 100% 0 0;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  border-radius: inherit;
+  width: 0%;
+  pointer-events: none;
+}
+
+/* Range input overlays the bar but is transparent */
+.demo-seek {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: transparent;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+}
+.demo-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--text);
+  margin-top: -3px; /* centers thumb on 8px track */
+}
+.demo-seek::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--text);
+}
+
+/* Ensure native <audio> stays hidden but accessible to AT if needed */
+[data-demo] audio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+  padding: 0;
+  margin: -1px;
+}
+
