@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+<BaseLayout title="Contact • Bailey Doyal" description="Book Bailey Doyal for your next project.">
+  <Fragment slot="header">
+    <SiteHeader />
+  </Fragment>
+
+  <section class="container">
+    <h1>Contact</h1>
+    <p>Email works best. Include project details like usage, length, deadlines, and direction preferences.</p>
+
+    <ul class="contact-list">
+      <li><strong>Email:</strong> <a href="mailto:bailey.doyal0@gmail.com">bailey.doyal0@gmail.com</a></li>
+      <li><strong>Twitter:</strong> <a href="https://twitter.com/" target="_blank" rel="noopener">twitter.com</a></li>
+      <li><strong>Facebook:</strong> <a href="https://facebook.com/" target="_blank" rel="noopener">facebook.com</a></li>
+    </ul>
+
+    <!-- Optional: simple embedded form via formspree or similar service -->
+    <form class="contact-form" action="https://formspree.io/f/your-id" method="POST">
+      <label>
+        Your name
+        <input type="text" name="name" required />
+      </label>
+      <label>
+        Your email
+        <input type="email" name="email" required />
+      </label>
+      <label>
+        Message
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <button class="btn primary" type="submit">Send</button>
+    </form>
+  </section>
+
+  <Fragment slot="footer">
+    <SiteFooter />
+  </Fragment>
+</BaseLayout>
