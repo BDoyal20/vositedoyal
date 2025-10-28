@@ -56,7 +56,21 @@ main { padding: 2rem 1rem; }
 .btn + .btn { margin-left: .75rem; }
 
 /* Demos */
-.demos-preview { max-width: 800px; margin: 3rem auto; padding: 1 1rem; }
+.demos-preview .demo-player {
+  background: var(--bg-alt);         /* slightly darker than the card */
+  border: 1px solid var(--border);   /* keeps subtle outline */
+  padding: 0.4rem 0.6rem;            /* smaller padding inside */
+  border-radius: 0.35rem;            /* less rounded corners */
+  max-width: 480px;                  /* narrower box width */
+  margin: 0 auto;                    /* centered horizontally */
+}
+
+@media (max-width: 600px) {
+  .demos-preview .demo-player {
+    max-width: 100%;                 /* full width on mobile */
+    padding: 0.4rem;
+  }
+}
 /* Make demo cards vertical on the homepage */
 .demos-grid {
   display: flex;
