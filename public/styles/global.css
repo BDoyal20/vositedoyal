@@ -534,45 +534,45 @@ main { padding: 2rem 1rem; }
   appearance: none;
   width: 100px;
   height: 4px;
-  background: linear-gradient(90deg, var(--brand), var(--brand-2)); /* brighter color */
   border-radius: 999px;
+  background: linear-gradient(90deg, #38bdf8, #3b82f6); /* your new track color */
   outline: none;
   cursor: pointer;
-  margin: 0;                 /* remove any inherited offset */
-  vertical-align: middle;    /* aligns visually with play/download buttons */
-  transform: translateY(1px); /* small correction to center vertically */
+  position: relative;
+  top: 2px; /* keeps alignment consistent */
 }
 
-/* Chrome / Edge / Safari thumb styling */
+/* Chrome / Edge / Safari thumb */
 .demo-volume::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--text);
-  border: 1px solid var(--border);
-  transition: background 0.2s ease;
+  background: #ffffff;          /* thumb (knob) color */
+  border: 1px solid #3b82f6;    /* border matches the track */
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 .demo-volume::-webkit-slider-thumb:hover {
-  background: var(--brand-2);
+  background: #60a5fa;          /* highlight when hovered */
+  transform: scale(1.15);
 }
 
-/* Firefox thumb styling */
+/* Firefox thumb + track */
 .demo-volume::-moz-range-thumb {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--text);
-  border: 1px solid var(--border);
-  transition: background 0.2s ease;
+  background: #ffffff;
+  border: 1px solid #3b82f6;
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 .demo-volume::-moz-range-thumb:hover {
-  background: var(--brand-2);
+  background: #60a5fa;
+  transform: scale(1.15);
 }
 
-/* Fix the track on Firefox to match the gradient */
 .demo-volume::-moz-range-track {
-  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  background: linear-gradient(90deg, #38bdf8, #3b82f6);
   height: 4px;
   border-radius: 999px;
 }
