@@ -203,7 +203,7 @@ main { padding: 2rem 1rem; }
 
 /* Optional subtle transition for the bar when scrubbing */
 .demo-bar {
-  transition: width 0.1s linear;
+  transition: none; /* follow thumb instantly */
 }
 
 /* Services */
@@ -365,4 +365,11 @@ main { padding: 2rem 1rem; }
   border: 0;
   padding: 0;
   margin: -1px;
+}
+
+/* Center section headers on index page */
+.demos-preview h2,
+.services h2 {
+  text-align: center;
+  margin-bottom: 1rem;
 }
