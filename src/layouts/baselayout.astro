@@ -1,0 +1,31 @@
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href="/images/logo.png" />
+    <link rel="preload" as="image" href="/images/headshot.jpg" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <script defer type="module" src="/index.js"></script>
+  </head>
+  <body>
+    <header>
+      <slot name="header" />
+    </header>
+
+    <main id="content">
+      <slot />
+    </main>
+
+    <footer>
+      <slot name="footer" />
+    </footer>
+  </body>
+</html>
