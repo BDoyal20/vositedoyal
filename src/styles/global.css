@@ -153,11 +153,3 @@ hr {
   /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
   white-space: nowrap;
 }
-
-/* Demos grid fix */
-.demos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
-  align-items: stretch;
-}
