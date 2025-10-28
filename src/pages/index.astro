@@ -7,226 +7,205 @@ const year = new Date().getFullYear();
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bailey Doyal | Voice Actor</title>
-    <meta
-      name="description"
-      content="Voice acting portfolio for Bailey Doyal. Character, commercial, narration, and video game demos with contact info."
-    />
+    <meta name="description" content="Voice acting portfolio for Bailey Doyal. Character, commercial, narration, and video game demos with contact information." />
     <style>
       :root {
-        --bg1: #0b0b10;
-        --bg2: #121218;
-        --text: #e6e6e9;
-        --muted: #a0a0aa;
-        --brand: #6366f1;
-        --card: #1a1a22;
-        --line: #2a2a33;
+        --bg1: #0a0a0f;
+        --bg2: #12121a;
+        --text: #ececf1;
+        --muted: #a6a6b0;
+        --brand: #6b6ef9;
+        --brand-2: #4f52d9;
+        --card: #181822;
+        --line: #2a2a36;
+        --ok: #19c37d;
       }
       * { box-sizing: border-box; }
       html, body { margin: 0; padding: 0; }
       body {
         font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
         color: var(--text);
-        background: linear-gradient(to bottom, var(--bg1), var(--bg2));
-      }
-      .wrap { max-width: 1024px; margin: 0 auto; padding: 0 1rem; }
-      header { text-align: center; padding: 4rem 0 2rem; }
-      h1 { font-size: 3rem; margin: 0; letter-spacing: 0.5px; }
-      .tag { color: var(--muted); font-size: 1.125rem; margin-top: 0.5rem; }
-
-      /* Headshot */
-      .headshot-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 2rem;
-        margin-bottom: 3rem;
-      }
-      .headshot {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        border: 3px solid var(--brand);
-        object-fit: cover;
-        box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+        background: radial-gradient(1000px 600px at 50% -10%, rgba(107,110,249,0.15), transparent 60%) , linear-gradient(to bottom, var(--bg1), var(--bg2));
       }
 
-      section { margin: 3rem 0; }
-      .section-title {
-        font-size: 1.75rem;
-        font-weight: 700;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid var(--line);
-        margin-bottom: 1.25rem;
-      }
-
-      .card {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 1rem;
-      }
-      .grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      @media (min-width: 720px) {
-        .grid { grid-template-columns: 1fr 1fr; }
-      }
-      h3 { margin: 0 0 0.5rem 0; font-size: 1.125rem; }
-
-      audio { width: 100%; height: 40px; }
-      .btn {
-        display: inline-block;
-        padding: 0.8rem 1.2rem;
-        border-radius: 10px;
-        background: var(--brand);
-        color: white;
-        text-decoration: none;
-        font-weight: 600;
-        transition: filter 0.2s ease;
-      }
-      .btn:hover { filter: brightness(1.05); }
+      .wrap { max-width: 1120px; margin: 0 auto; padding: 0 1rem; }
       .stack { display: grid; gap: 0.75rem; }
       .muted { color: var(--muted); }
+      .pill { display: inline-block; padding: 0.25rem 0.6rem; border: 1px solid var(--line); border-radius: 999px; font-size: 0.85rem; color: var(--muted); background: rgba(255,255,255,0.02); }
+      .btn {
+        display: inline-block; padding: 0.85rem 1.25rem; border-radius: 12px;
+        background: linear-gradient(90deg, var(--brand), var(--brand-2));
+        color: #fff; text-decoration: none; font-weight: 700; letter-spacing: 0.2px; transition: transform 0.05s ease, filter 0.2s ease;
+      }
+      .btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+      .btn-ghost { display: inline-block; padding: 0.85rem 1.1rem; border-radius: 12px; border: 1px solid var(--line); color: var(--text); text-decoration: none; }
+      .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1rem; }
+      .section { margin: 3rem 0; }
+      .section-title { font-size: 1.8rem; font-weight: 800; padding-bottom: 0.6rem; border-bottom: 1px solid var(--line); margin-bottom: 1.2rem; }
+      .grid-2 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+      @media (min-width: 760px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+      .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+      @media (min-width: 900px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
 
-      footer {
-        border-top: 1px solid var(--line);
-        margin-top: 3rem;
-        padding: 1.5rem 0 3rem;
-        text-align: center;
-        color: var(--muted);
-      }
+      /* Hero */
+      header.hero { padding: 3.5rem 0 2rem; text-align: center; }
+      .hero h1 { font-size: 3rem; margin: 0; letter-spacing: 0.4px; }
+      .hero .sub { margin-top: 0.6rem; font-size: 1.15rem; color: var(--muted); }
+      .cta { margin-top: 1.2rem; display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
 
-      .list {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      @media (min-width: 720px) {
-        .list { grid-template-columns: 1fr 1fr; }
-      }
-      .li { padding: 0.75rem 1rem; border: 1px solid var(--line); border-radius: 12px; background: transparent; }
+      /* Headshot */
+      .headshot-wrap { display: flex; justify-content: center; margin: 1.5rem 0 2.5rem; }
+      .headshot { width: 180px; height: 180px; border-radius: 50%; border: 3px solid var(--brand); object-fit: cover; box-shadow: 0 0 18px rgba(107,110,249,0.28); }
 
-      /* Social links */
-      .socials {
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem;
-        margin-top: 1rem;
-      }
-      .socials a {
-        color: var(--muted);
-        text-decoration: none;
-        font-size: 1.2rem;
-        transition: color 0.3s ease;
-      }
-      .socials a:hover {
-        color: var(--brand);
-      }
+      /* Demo cards */
+      h3 { margin: 0 0 0.45rem 0; font-size: 1.05rem; }
+      audio { width: 100%; height: 40px; }
+      .note { margin-top: 0.5rem; font-size: 0.95rem; color: var(--muted); }
 
-      .email {
-        text-align: center;
-        margin-top: 1rem;
-        font-size: 1rem;
-        color: var(--muted);
-      }
+      /* Credibility strip */
+      .strip { display: grid; gap: 0.75rem; grid-template-columns: 1fr 1fr; }
+      @media (min-width: 640px) { .strip { grid-template-columns: repeat(4, 1fr); } }
+      .stamp { border: 1px dashed var(--line); border-radius: 12px; padding: 0.75rem; text-align: center; font-size: 0.95rem; }
+      .ok { color: var(--ok); font-weight: 700; }
+
+      /* About + Specs */
+      .list { display: grid; grid-template-columns: 1fr; gap: 0.85rem; }
+      @media (min-width: 760px) { .list { grid-template-columns: 1fr 1fr; } }
+      .li { padding: 0.8rem 1rem; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,0.02); }
+
+      /* Testimonials */
+      blockquote { margin: 0; padding: 1rem; border-left: 3px solid var(--brand); background: rgba(255,255,255,0.02); border-radius: 8px; }
+      .who { margin-top: 0.4rem; font-size: 0.9rem; color: var(--muted); }
+
+      /* Contact */
+      .socials { display: flex; justify-content: center; gap: 1rem; margin-top: 0.8rem; }
+      .socials a { color: var(--muted); text-decoration: none; font-size: 0.98rem; }
+      .socials a:hover { color: var(--brand); }
+      .email { text-align: center; margin-top: 0.6rem; font-size: 1rem; color: var(--muted); }
+
+      footer { border-top: 1px solid var(--line); margin-top: 3rem; padding: 1.2rem 0 3rem; text-align: center; color: var(--muted); }
     </style>
   </head>
 
   <body>
-    <header class="wrap">
+    <!-- HERO -->
+    <header class="hero wrap">
+      <span class="pill">Los Angeles • Broadcast-ready</span>
       <h1>Bailey Doyal</h1>
-      <div class="tag">Voice Actor, Narrator, Commercial</div>
+      <div class="sub">Voice Actor for Character, Commercial, Narration, and Games</div>
+      <div class="cta">
+        <a class="btn" href="#demos">Listen to Demos</a>
+        <a class="btn-ghost" href="#contact">Book or Request Audition</a>
+      </div>
     </header>
 
-    <!-- Headshot -->
-    <div class="headshot-container">
-      <img
-        src="/images/headshot.jpg"
-        alt="Bailey Doyal Headshot"
-        class="headshot"
-      />
+    <!-- HEADSHOT -->
+    <div class="headshot-wrap">
+      <img src="/images/headshot.jpg" alt="Bailey Doyal headshot" class="headshot" />
     </div>
 
     <main class="wrap">
-      <!-- Demo Reels -->
-      <section>
+      <!-- DEMOS -->
+      <section id="demos" class="section">
         <div class="section-title">Demo Reels</div>
-        <div class="grid">
+        <div class="grid-2">
           <div class="card">
             <h3>Character Demo</h3>
             <audio controls preload="metadata">
               <source src="/audio/character-demo.mp3" type="audio/mpeg" />
             </audio>
-            <p class="muted" style="margin-top:0.5rem">Dynamic characters, anime, and games.</p>
+            <p class="note">Dynamic characters for anime and games.</p>
           </div>
           <div class="card">
             <h3>Commercial Demo</h3>
             <audio controls preload="metadata">
               <source src="/audio/commercial-demo.mp3" type="audio/mpeg" />
             </audio>
-            <p class="muted" style="margin-top:0.5rem">Conversational, trustworthy, and upbeat reads.</p>
+            <p class="note">Conversational, friendly, and trustworthy reads.</p>
           </div>
           <div class="card">
             <h3>Narration Demo</h3>
             <audio controls preload="metadata">
               <source src="/audio/narration-demo.mp3" type="audio/mpeg" />
             </audio>
-            <p class="muted" style="margin-top:0.5rem">Documentaries, audiobooks, and corporate narration.</p>
+            <p class="note">Documentary, corporate, and e-learning.</p>
           </div>
           <div class="card">
             <h3>Video Game Demo</h3>
             <audio controls preload="metadata">
               <source src="/audio/videogame-demo.mp3" type="audio/mpeg" />
             </audio>
-            <p class="muted" style="margin-top:0.5rem">Energetic, emotional, and immersive performances.</p>
+            <p class="note">Energetic, emotional, and immersive performances.</p>
           </div>
         </div>
       </section>
 
-      <!-- About -->
-      <section>
+      <!-- CREDIBILITY STRIP (edit freely) -->
+      <section class="section">
+        <div class="grid-3">
+          <div class="stamp">Fast turnarounds <span class="ok">✓</span></div>
+          <div class="stamp">Clean, broadcast quality <span class="ok">✓</span></div>
+          <div class="stamp">Source-Connect available <span class="ok">✓</span></div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="section">
         <div class="section-title">About</div>
         <div class="card stack">
           <p>
-            Versatile voice with clear articulation and grounded delivery. Experienced with character acting, commercial reads, and narration. Fast turnaround with clean, broadcast-ready audio.
+            Versatile voice with clear articulation and grounded delivery. I record from a treated space and deliver polished audio that is easy to drop into your timeline. I work to brief, communicate clearly, and keep projects moving.
           </p>
           <div class="list">
-            <div class="li">
-              <strong>Range</strong><br />
-              Warm mid-low, youthful to authoritative
-            </div>
-            <div class="li">
-              <strong>Accents</strong><br />
-              General American, light Southern, neutral
-            </div>
+            <div class="li"><strong>Range</strong><br />Youthful to authoritative, mid-low warmth</div>
+            <div class="li"><strong>Styles</strong><br />Friendly conversational, confident, sincere, heroic</div>
           </div>
         </div>
       </section>
 
-      <!-- Studio -->
-      <section>
+      <!-- STUDIO SPECS -->
+      <section class="section">
         <div class="section-title">Studio Specs</div>
         <div class="card list">
-          <div class="li"><strong>Mic</strong><br />UA Sphere LX or equivalent LDC</div>
-          <div class="li"><strong>Interface</strong><br />Apollo Twin X or comparable</div>
-          <div class="li"><strong>Chain</strong><br />Clean, minimal noise floor</div>
-          <div class="li"><strong>Delivery</strong><br />WAV 48 kHz 24-bit, or per spec</div>
+          <div class="li"><strong>Mic</strong><br />UA Sphere LX, large-diaphragm condenser</div>
+          <div class="li"><strong>Interface</strong><br />Apollo Twin X class device</div>
+          <div class="li"><strong>Delivery</strong><br />WAV 48 kHz 24-bit or per spec</div>
+          <div class="li"><strong>Live Direction</strong><br />Source-Connect, Zoom, Meet</div>
         </div>
       </section>
 
-      <!-- Contact -->
-      <section id="contact">
+      <!-- TESTIMONIALS (placeholders) -->
+      <section class="section">
+        <div class="section-title">What Clients Say</div>
+        <div class="grid-2">
+          <div class="card">
+            <blockquote>
+              On brief, fast, and fantastic delivery. The reads sat perfectly in the mix.
+            </blockquote>
+            <div class="who">Producer, Commercial Campaign</div>
+          </div>
+          <div class="card">
+            <blockquote>
+              Nailed the character in two takes and took direction cleanly on the call.
+            </blockquote>
+            <div class="who">Game Audio Director</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="section">
         <div class="section-title">Contact</div>
         <div class="card stack" style="text-align:center;">
-          <p class="muted">Project in mind or want a custom audition?</p>
+          <p class="muted">Project in mind or want a custom audition</p>
 
           <div class="email">
             📧 <a href="mailto:bailey.doyal0@gmail.com" style="color:var(--text);text-decoration:none;">bailey.doyal0@gmail.com</a>
           </div>
 
-          <div>
+          <div class="cta" style="justify-content:center;">
             <a class="btn" href="mailto:bailey.doyal0@gmail.com">Email Me</a>
+            <a class="btn-ghost" href="#demos">Replay Demos</a>
           </div>
 
           <div class="socials">
@@ -235,13 +214,11 @@ const year = new Date().getFullYear();
             <a href="#" target="_blank" rel="noopener noreferrer">More…</a>
           </div>
 
-          <p class="muted" style="margin-top:0.75rem;">Response within one business day.</p>
+          <p class="muted" style="margin-top:0.6rem;">Typical response within one business day.</p>
         </div>
       </section>
     </main>
 
-    <footer>
-      © {year} Bailey Doyal • Voice Acting Portfolio
-    </footer>
+    <footer>© {year} Bailey Doyal • Voice Acting Portfolio</footer>
   </body>
 </html>
