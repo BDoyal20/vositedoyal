@@ -57,6 +57,7 @@ main { padding: 2rem 1rem; }
 
 /* Demos */
 .demos-preview .demo-player {
+  align-items: center;
   background: var(--bg-alt);         /* slightly darker than the card */
   border: 1px solid var(--border);   /* keeps subtle outline */
   padding: 0.4rem 0.6rem;            /* smaller padding inside */
@@ -69,7 +70,7 @@ main { padding: 2rem 1rem; }
 @media (max-width: 600px) {
   .demos-preview .demo-player {
     max-width: 100%;                 /* full width on mobile */
-    padding: 0.4rem;
+    padding: 1rem;
   }
 }
 /* Make demo cards vertical on the homepage */
@@ -79,8 +80,8 @@ main { padding: 2rem 1rem; }
   gap: 1.25rem;
   max-width: 600px;
   margin: 0 auto;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 @media (max-width: 900px) { .demos-grid { grid-template-columns: 1fr 1fr; } }
