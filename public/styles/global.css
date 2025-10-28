@@ -73,6 +73,14 @@ main { padding: 2rem 1rem; }
     padding: 2rem;
   }
 }
+.demos-preview .demos-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
 /* Make demo cards vertical on the homepage */
 .demos-grid {
   display: flex;
@@ -80,8 +88,8 @@ main { padding: 2rem 1rem; }
   gap: 1.25rem;
   max-width: 600px;
   margin: 0 auto;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 @media (max-width: 900px) { .demos-grid { grid-template-columns: 1fr 1fr; } }
