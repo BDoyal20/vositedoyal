@@ -98,51 +98,52 @@ main { padding: 2rem 1rem; }
 }
 .demo-player audio { flex: 1; }
 
-/* Progress bar is clickable and draggable */
+/* --- Demo Progress Bar + Thumb Fix --- */
 .demo-progress {
   position: relative;
   height: 8px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 999px;
-  overflow: visible; /* let the thumb pop out */
+  overflow: visible;
   cursor: pointer;
-  touch-action: none; /* allow smooth scrubbing on touch */
+  touch-action: none;
 }
 
-/* Increase hit area without changing visuals */
 .demo-progress::before {
   content: "";
   position: absolute;
-  left: 0; right: 0;
-  top: -8px; bottom: -8px; /* larger hit target */
+  inset: -8px 0;
 }
 
-/* Filled portion */
+/* Filled section of the progress bar */
 .demo-bar {
   position: absolute;
-  inset: 0 100% 0 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
   background: linear-gradient(135deg, var(--brand), var(--brand-2));
   border-radius: inherit;
-  width: 0%;
   pointer-events: none;
+  z-index: 1; /* lower than thumb */
 }
 
-/* Draggable thumb */
+/* The draggable thumb */
 .demo-thumb {
   position: absolute;
   top: 50%;
   left: 0%;
+  transform: translate(-50%, -50%);
   width: 16px;
   height: 16px;
-  transform: translate(-50%, -50%); /* center over the progress */
   border-radius: 50%;
   background: var(--text);
   border: 1px solid var(--border);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  pointer-events: none; /* pointer events handled on .demo-progress */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  z-index: 2; /* ensure it's above .demo-bar */
 }
 
-/* Transparent range overlay for keyboard users */
+/* Transparent range overlay for accessibility */
 .demo-seek {
   -webkit-appearance: none;
   appearance: none;
@@ -150,11 +151,60 @@ main { padding: 2rem 1rem; }
   inset: 0;
   width: 100%;
   background: transparent;
-  z-index: 2;
+  z-index: 3;
   cursor: pointer;
 }
-.demo-seek::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 0; height: 0; }
-.demo-seek::-moz-range-thumb { width: 0; height: 0; border: 0; }
+
+.demo-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+}
+
+.demo-seek::-moz-range-thumb {
+  width: 0;
+  height: 0;
+  border: 0;
+}
+
+/* --- Interactive Glow for Demo Thumb --- */
+
+/* Default thumb appearance */
+.demo-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  transition: box-shadow 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+/* Hover or focus effect */
+.demo-progress:hover .demo-thumb,
+.demo-thumb:focus {
+  background: var(--brand);
+  box-shadow: 0 0 8px var(--brand-2), 0 0 4px var(--brand);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Dragging (active) effect */
+[data-dragging="true"] .demo-thumb {
+  background: var(--brand-2);
+  box-shadow: 0 0 12px var(--brand-2), 0 0 6px var(--brand);
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+/* Optional subtle transition for the bar when scrubbing */
+.demo-bar {
+  transition: width 0.1s linear;
+}
 
 /* Services */
 .services { max-width: 1100px; margin: 3rem auto; padding: 0 1rem; }
