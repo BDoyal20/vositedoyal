@@ -352,32 +352,102 @@ main { padding: 2rem 1rem; }
   margin: -1px;
 }
 
-/* --- Compact demo bars for homepage --- */
+/* === HOMEPAGE DEMO SECTION CLEANUP === */
+
+/* Center and tighten the overall section */
+.demos-preview {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+/* Compact column layout */
+.demos-preview .demos-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Smaller, cleaner demo card */
 .demos-preview .demo-player {
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.4rem;
-  gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 420px;
   background: var(--card);
   border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+.demos-preview .demo-player:hover {
+  transform: scale(1.01);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Resize and clean up buttons */
+.demos-preview .demo-btn {
+  width: 30px;
+  height: 30px;
+  font-size: 0.9rem;
+  border-radius: 0.4rem;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--text);
+}
+
+.demos-preview .demo-btn.small {
+  font-size: 0.8rem;
+}
+
+/* Compact text */
 .demos-preview .demo-title {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
+  text-align: left;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* Slim progress bar */
 .demos-preview .demo-progress {
-  height: 4px;               /* slimmer bar */
-  margin-top: 0.25rem;
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
 }
 
 .demos-preview .demo-bar {
-  height: 2px;               /* even thinner fill line */
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  border-radius: 999px;
   transform: translateY(-50%);
 }
 
 .demos-preview .demo-thumb {
-  width: 12px;
-  height: 12px;
-  border-width: 1px;
+  width: 10px;
+  height: 10px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Ensure audio element doesn't take up space */
+.demos-preview audio {
+  display: none;
 }
