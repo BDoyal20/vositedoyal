@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Mobile nav toggle
   const navToggle = document.getElementById('nav-toggle');
   const navMenu = document.getElementById('nav-menu');
   if (navToggle && navMenu) {
@@ -8,9 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Smooth scroll for anchor links
-  const links = document.querySelectorAll('a[href^="#"]');
-  links.forEach((link) => {
+  // Smooth scroll for on-page anchors
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
       if (!href) return;
@@ -24,69 +24,102 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Demo players: exclusive playback and toggle text
+  // ===== Uniform Demo Player =====
   const players = Array.from(document.querySelectorAll('[data-demo]'));
-  const audios = players.map(p => p.querySelector('audio'));
 
-  function pauseAll(except) {
-    audios.forEach(a => {
-      if (a !== except) {
+  // Format seconds -> M:SS
+  function fmt(t) {
+    if (!isFinite(t) || t < 0) t = 0;
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60);
+    return `${m}:${s.toString().padStart(2, '0')}`;
+  }
+
+  // Pause all others
+  function pauseOthers(exceptAudio) {
+    players.forEach(p => {
+      const a = p.querySelector('audio');
+      if (a && a !== exceptAudio) {
         a.pause();
-        const container = a.closest('[data-demo]');
-        const btn = container?.querySelector('.play');
-        const live = container?.querySelector('[aria-live]');
-        if (btn) {
-          btn.textContent = '▶ Play';
-          btn.setAttribute('aria-pressed', 'false');
-        }
-        if (live) live.textContent = '';
+        updateUI(p, 'paused');
       }
     });
   }
 
-  players.forEach(container => {
-    const btn = container.querySelector('.play');
+  // Update UI for a given player
+  function updateUI(container, state) {
+    const btn = container.querySelector('[data-action="toggle"]');
+    const time = container.querySelector('[data-time"]') || container.querySelector('[data-time]');
     const audio = container.querySelector('audio');
-    const live = container.querySelector('[aria-live]');
+    const seek = container.querySelector('.demo-seek');
+    const bar = container.querySelector('[data-bar]');
 
-    // Button click toggles play/pause
-    btn?.addEventListener('click', () => {
-      const src = btn.getAttribute('data-demo-src');
-      if (!src) return;
-      if (audio.getAttribute('src') !== src) audio.setAttribute('src', src);
+    if (audio && seek && bar) {
+      const dur = isFinite(audio.duration) ? audio.duration : 0;
+      const cur = isFinite(audio.currentTime) ? audio.currentTime : 0;
+      const pct = dur > 0 ? (cur / dur) * 100 : 0;
+      seek.value = String(pct);
+      bar.style.width = `${pct}%`;
+      time.textContent = `${fmt(cur)} / ${fmt(dur)}`;
+    }
 
+    if (btn) {
+      if (state === 'playing') {
+        btn.textContent = '⏸';
+        btn.setAttribute('aria-pressed', 'true');
+        btn.setAttribute('aria-label', 'Pause');
+      } else {
+        btn.textContent = '▶';
+        btn.setAttribute('aria-pressed', 'false');
+        btn.setAttribute('aria-label', 'Play');
+      }
+    }
+  }
+
+  players.forEach(container => {
+    const audio = container.querySelector('audio');
+    const toggle = container.querySelector('[data-action="toggle"]');
+    const stop = container.querySelector('[data-action="stop"]');
+    const seek = container.querySelector('.demo-seek');
+
+    if (!audio || !toggle || !seek) return;
+
+    // Button toggle
+    toggle.addEventListener('click', () => {
       if (audio.paused) {
-        pauseAll(audio);
+        pauseOthers(audio);
         audio.play().catch(() => {});
       } else {
         audio.pause();
       }
     });
 
-    // Reflect state changes in UI
-    audio?.addEventListener('play', () => {
-      pauseAll(audio);
-      if (btn) {
-        btn.textContent = '⏸ Pause';
-        btn.setAttribute('aria-pressed', 'true');
-      }
-      if (live) live.textContent = 'Now playing';
+    // Stop button
+    stop?.addEventListener('click', () => {
+      audio.pause();
+      audio.currentTime = 0;
+      updateUI(container, 'paused');
     });
 
-    audio?.addEventListener('pause', () => {
-      if (btn) {
-        btn.textContent = '▶ Play';
-        btn.setAttribute('aria-pressed', 'false');
-      }
-      if (live) live.textContent = 'Paused';
+    // Seek via range
+    seek.addEventListener('input', () => {
+      if (!isFinite(audio.duration) || audio.duration === 0) return;
+      const pct = Number(seek.value);
+      audio.currentTime = (pct / 100) * audio.duration;
+      updateUI(container, audio.paused ? 'paused' : 'playing');
     });
 
-    audio?.addEventListener('ended', () => {
-      if (btn) {
-        btn.textContent = '▶ Play';
-        btn.setAttribute('aria-pressed', 'false');
-      }
-      if (live) live.textContent = '';
+    // Media events
+    audio.addEventListener('loadedmetadata', () => updateUI(container, 'paused'));
+    audio.addEventListener('timeupdate', () => updateUI(container, audio.paused ? 'paused' : 'playing'));
+    audio.addEventListener('play', () => {
+      pauseOthers(audio);
+      updateUI(container, 'playing');
+    });
+    audio.addEventListener('pause', () => updateUI(container, 'paused'));
+    audio.addEventListener('ended', () => {
+      audio.currentTime = 0;
+      updateUI(container, 'paused');
     });
   });
 });
