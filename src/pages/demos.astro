@@ -12,11 +12,18 @@ import DemoPlayer from '../components/DemoPlayer.astro';
   <section class="container">
     <h1>Demos</h1>
     <p style="color:var(--muted); margin-top:-.25rem;">Click Play to hear samples. Only one demo plays at a time.</p>
+
     <div class="demos-list" style="display:grid; gap:1rem; margin-top:1rem;">
       <DemoPlayer title="Commercial" src="/audio/commercial.mp3" />
       <DemoPlayer title="Narration" src="/audio/narration.mp3" />
       <DemoPlayer title="Character" src="/audio/character.mp3" />
       <DemoPlayer title="Promo" src="/audio/promo.mp3" />
+
+      <!-- New entries. Replace filenames with your actual audio or upload these names -->
+      <DemoPlayer title="eLearning" src="/audio/elearning.mp3" />
+      <DemoPlayer title="Corporate" src="/audio/corporate.mp3" />
+      <DemoPlayer title="Trailer" src="/audio/trailer.mp3" />
+      <DemoPlayer title="IVR / Phone" src="/audio/ivr.mp3" />
     </div>
   </section>
 
