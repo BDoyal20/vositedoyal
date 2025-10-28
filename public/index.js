@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Mobile nav toggle
+  // ===== NAV =====
   const navToggle = document.getElementById('nav-toggle');
   const navMenu = document.getElementById('nav-menu');
   if (navToggle && navMenu) {
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Smooth scroll for anchors
+  // ===== Smooth scroll =====
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ===== Demo Players =====
+  // ===== DEMO PLAYERS =====
   const players = Array.from(document.querySelectorAll('[data-demo]'));
 
   const fmt = (t) => {
@@ -45,7 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateUI(container, state) {
-    if (container.dataset.dragging === 'true') return; // skip updates during drag
+    // If dragging, don't override current drag visuals
+    if (container.dataset.dragging === 'true') return;
+
     const btn = container.querySelector('[data-action="toggle"]');
     const time = container.querySelector('[data-time]');
     const audio = container.querySelector('audio');
@@ -82,16 +84,99 @@ document.addEventListener('DOMContentLoaded', () => {
     const bar = container.querySelector('[data-bar]');
     const thumb = container.querySelector('[data-thumb]');
     const seek = container.querySelector('.demo-seek');
+    const time = container.querySelector('[data-time]');
 
     if (!audio || !toggle || !progress || !bar || !thumb) return;
 
-    // Toggle play/pause
+    // --- Play / Pause ---
     toggle.addEventListener('click', () => {
       if (audio.paused) {
         pauseOthers(audio);
-        audio.play().catch(() => {});
-      } else audio.pause();
+        audio.play().catch((err) => console.warn('Playback error:', err));
+      } else {
+        audio.pause();
+      }
     });
 
-    // Stop button
-    stop?.addEventListener('click', ()
+    // --- Stop ---
+    stop?.addEventListener('click', () => {
+      audio.pause();
+      audio.currentTime = 0;
+      updateUI(container, 'paused');
+    });
+
+    // --- Range input (keyboard access) ---
+    seek?.addEventListener('input', () => {
+      if (!isFinite(audio.duration)) return;
+      const pct = Number(seek.value);
+      audio.currentTime = (pct / 100) * audio.duration;
+      updateUI(container, audio.paused ? 'paused' : 'playing');
+    });
+
+    // --- Click or drag seek ---
+    function seekFromClientX(clientX) {
+      const rect = progress.getBoundingClientRect();
+      const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
+      const pct = x / rect.width;
+      const dur = audio.duration;
+      if (isFinite(dur)) {
+        const newTime = pct * dur;
+        bar.style.width = `${pct * 100}%`;
+        thumb.style.left = `${pct * 100}%`;
+        if (time) time.textContent = `${fmt(newTime)} / ${fmt(dur)}`;
+        audio.currentTime = newTime;
+      }
+    }
+
+    let dragging = false;
+    let activeId = null;
+
+    progress.addEventListener('pointerdown', (e) => {
+      dragging = true;
+      container.dataset.dragging = 'true';
+      activeId = e.pointerId;
+      progress.setPointerCapture?.(activeId);
+      document.body.style.userSelect = 'none';
+      document.body.style.cursor = 'ew-resize';
+      seekFromClientX(e.clientX);
+    });
+
+    progress.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      seekFromClientX(e.clientX);
+    });
+
+    progress.addEventListener('pointerup', () => {
+      if (!dragging) return;
+      dragging = false;
+      container.dataset.dragging = 'false';
+      document.body.style.userSelect = '';
+      document.body.style.cursor = '';
+      if (activeId != null) {
+        progress.releasePointerCapture?.(activeId);
+        activeId = null;
+      }
+      updateUI(container, audio.paused ? 'paused' : 'playing');
+    });
+
+    progress.addEventListener('pointercancel', () => {
+      dragging = false;
+      container.dataset.dragging = 'false';
+      document.body.style.userSelect = '';
+      document.body.style.cursor = '';
+    });
+
+    // --- Audio Events ---
+    audio.addEventListener('loadedmetadata', () => updateUI(container, 'paused'));
+    audio.addEventListener('timeupdate', () => updateUI(container, audio.paused ? 'paused' : 'playing'));
+    audio.addEventListener('play', () => {
+      pauseOthers(audio);
+      updateUI(container, 'playing');
+    });
+    audio.addEventListener('pause', () => updateUI(container, 'paused'));
+    audio.addEventListener('ended', () => {
+      audio.currentTime = 0;
+      updateUI(container, 'paused');
+    });
+  });
+});
