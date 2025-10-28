@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateUI(container, state) {
     const btn = container.querySelector('[data-action="toggle"]');
-    const time = container.querySelector('[data-time]') || container.querySelector('[data-time"]');
+    const time = container.querySelector('[data-time]');
     const audio = container.querySelector('audio');
     const seek = container.querySelector('.demo-seek');
     const bar = container.querySelector('[data-bar]');
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const pct = dur > 0 ? (cur / dur) * 100 : 0;
       seek.value = String(pct);
       bar.style.width = `${pct}%`;
-      time.textContent = `${fmt(cur)} / ${fmt(dur)}`;
+      if (time) time.textContent = `${fmt(cur)} / ${fmt(dur)}`;
     }
 
     if (btn) {
@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggle = container.querySelector('[data-action="toggle"]');
     const stop = container.querySelector('[data-action="stop"]');
     const seek = container.querySelector('.demo-seek');
+    const progress = container.querySelector('[data-progress]'); // ✅ the clickable bar
 
     if (!audio || !toggle || !seek) return;
 
@@ -101,6 +102,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const pct = Number(seek.value);
       audio.currentTime = (pct / 100) * audio.duration;
       updateUI(container, audio.paused ? 'paused' : 'playing');
+    });
+
+    // ✅ Click anywhere on the progress bar to seek
+    progress?.addEventListener('click', (e) => {
+      const rect = progress.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const pct = Math.max(0, Math.min(1, x / rect.width));
+      if (isFinite(audio.duration)) {
+        audio.currentTime = pct * audio.duration;
+        updateUI(container, audio.paused ? 'paused' : 'playing');
+      }
     });
 
     audio.addEventListener('loadedmetadata', () => updateUI(container, 'paused'));
