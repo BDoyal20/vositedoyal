@@ -5,10 +5,19 @@ interface Props {
 }
 const { title, src } = Astro.props;
 ---
-<div class="demo-player">
-  <button class="play" data-demo-src={src} aria-label={`Play ${title}`}>
+<div class="demo-player" data-demo>
+  <button class="play" data-demo-src={src} aria-label={`Play ${title}`} aria-pressed="false">
     ▶ Play
   </button>
   <span class="demo-title">{title}</span>
+  <span class="sr-only" aria-live="polite"></span>
   <audio preload="none" src={src} controls></audio>
 </div>
+
+<style>
+.demo-player { display: flex; align-items: center; gap: .75rem; padding: .75rem; background: var(--card); border: 1px solid var(--border); border-radius: .75rem; }
+.demo-player .play { cursor: pointer; background: transparent; color: var(--text); border: 1px solid var(--border); border-radius: .5rem; padding: .4rem .6rem; min-width: 80px; text-align: center; }
+.demo-title { font-weight: 600; }
+.sr-only { position: absolute; left: -9999px; }
+.demo-player audio { flex: 1; }
+</style>
