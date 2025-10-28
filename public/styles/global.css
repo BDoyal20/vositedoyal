@@ -167,8 +167,12 @@ main { padding: 2rem 1rem; }
 
 /* Keep left and right controls tidy */
 .demos-preview .demo-btn { width: 32px; height: 32px; font-size: .9rem; border-radius: .4rem; }
-.demos-preview .demo-volume { width: 90px; height: 4px; }
-
+.demos-preview .demo-volume {
+  position: relative;
+  top: 2px;                 /* lowers it slightly to align with play/download buttons */
+  margin: 0;
+  transform: none;          /* remove any earlier vertical shift */
+}
 /* Uniform card width and spacing, regardless of title length */
 .demos-preview .demo-center { min-width: 0; }
 /* Make demo cards vertical on the homepage */
