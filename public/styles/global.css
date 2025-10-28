@@ -351,3 +351,33 @@ main { padding: 2rem 1rem; }
   padding: 0;
   margin: -1px;
 }
+
+/* --- Compact demo bars for homepage --- */
+.demos-preview .demo-player {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.4rem;
+  gap: 0.5rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.demos-preview .demo-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.demos-preview .demo-progress {
+  height: 4px;               /* slimmer bar */
+  margin-top: 0.25rem;
+}
+
+.demos-preview .demo-bar {
+  height: 2px;               /* even thinner fill line */
+  transform: translateY(-50%);
+}
+
+.demos-preview .demo-thumb {
+  width: 12px;
+  height: 12px;
+  border-width: 1px;
+}
