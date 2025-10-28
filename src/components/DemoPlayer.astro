@@ -14,14 +14,16 @@ const { title, src } = Astro.props;
       <span class="demo-time" data-time>0:00 / 0:00</span>
     </div>
 
-    <div class="demo-progress" data-progress>
+    <div class="demo-progress" data-progress aria-label="Audio progress">
       <div class="demo-bar" data-bar></div>
+      <div class="demo-thumb" data-thumb></div>
+      <!-- Keep range for keyboard accessibility -->
       <input class="demo-seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek" />
     </div>
   </div>
 
   <button class="demo-btn small" data-action="stop" aria-label="Stop">■</button>
 
-  <!-- Hidden native player. JS drives the UI for consistency -->
+  <!-- Hidden native player -->
   <audio preload="metadata" src={src}></audio>
 </div>
