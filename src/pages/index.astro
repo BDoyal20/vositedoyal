@@ -1,67 +1,175 @@
-import React from "react";
-import { render } from "astro/runtime";
+---
+const year = new Date().getFullYear();
+---
 
-export default function VoiceActingPortfolio() {
-  return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-gray-100 font-sans">
-      <header className="text-center py-16">
-        <h1 className="text-5xl font-bold tracking-tight">Bailey Doyal</h1>
-        <p className="text-xl mt-4 text-gray-400">Voice Actor | Narrator | Storyteller</p>
-      </header>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <title>Bailey Doyal | Voice Actor</title>
+    <meta
+      name="description"
+      content="Voice acting portfolio for Bailey Doyal. Character, commercial, and narration demos with contact info."
+    />
+    <style>
+      :root {
+        --bg1: #0b0b10;
+        --bg2: #121218;
+        --text: #e6e6e9;
+        --muted: #a0a0aa;
+        --brand: #6366f1;
+        --card: #1a1a22;
+        --line: #2a2a33;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        color: var(--text);
+        background: linear-gradient(to bottom, var(--bg1), var(--bg2));
+      }
+      .wrap { max-width: 1024px; margin: 0 auto; padding: 0 1rem; }
+      header { text-align: center; padding: 4rem 0 2rem; }
+      h1 { font-size: 3rem; margin: 0; letter-spacing: 0.5px; }
+      .tag { color: var(--muted); font-size: 1.125rem; margin-top: 0.5rem; }
 
-      <section className="max-w-4xl mx-auto px-6 mb-24">
-        <h2 className="text-3xl font-semibold mb-6 border-b border-gray-700 pb-2">
-          Demo Reels
-        </h2>
-        <div className="space-y-8">
-          <div>
-            <h3 className="text-xl font-medium mb-2">Character Demo</h3>
-            <audio controls className="w-full rounded">
+      section { margin: 3rem 0; }
+      .section-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 1.25rem;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 1rem;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      @media (min-width: 720px) {
+        .grid { grid-template-columns: 1fr 1fr; }
+      }
+      h3 { margin: 0 0 0.5rem 0; font-size: 1.125rem; }
+
+      audio { width: 100%; height: 40px; }
+      .btn {
+        display: inline-block;
+        padding: 0.8rem 1.2rem;
+        border-radius: 10px;
+        background: var(--brand);
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: filter 0.2s ease;
+      }
+      .btn:hover { filter: brightness(1.05); }
+      .stack { display: grid; gap: 0.75rem; }
+      .muted { color: var(--muted); }
+
+      footer {
+        border-top: 1px solid var(--line);
+        margin-top: 3rem;
+        padding: 1.5rem 0 3rem;
+        text-align: center;
+        color: var(--muted);
+      }
+
+      .list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      @media (min-width: 720px) {
+        .list { grid-template-columns: 1fr 1fr; }
+      }
+      .li { padding: 0.75rem 1rem; border: 1px solid var(--line); border-radius: 12px; background: transparent; }
+    </style>
+  </head>
+
+  <body>
+    <header class="wrap">
+      <h1>Bailey Doyal</h1>
+      <div class="tag">Voice Actor, Narrator, Commercial</div>
+    </header>
+
+    <main class="wrap">
+      <!-- Demo Reels -->
+      <section>
+        <div class="section-title">Demo Reels</div>
+        <div class="grid">
+          <div class="card">
+            <h3>Character Demo</h3>
+            <audio controls preload="metadata">
               <source src="/audio/character-demo.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
             </audio>
+            <p class="muted" style="margin-top:0.5rem">Dynamic characters, anime, and games.</p>
           </div>
-          <div>
-            <h3 className="text-xl font-medium mb-2">Commercial Demo</h3>
-            <audio controls className="w-full rounded">
+          <div class="card">
+            <h3>Commercial Demo</h3>
+            <audio controls preload="metadata">
               <source src="/audio/commercial-demo.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
             </audio>
+            <p class="muted" style="margin-top:0.5rem">Conversational, trustworthy, and upbeat reads.</p>
           </div>
         </div>
       </section>
 
-      <section className="max-w-4xl mx-auto px-6 mb-24">
-        <h2 className="text-3xl font-semibold mb-6 border-b border-gray-700 pb-2">
-          About Me
-        </h2>
-        <p className="text-lg leading-relaxed text-gray-300">
-          I’m a passionate voice actor with experience in character performance, narration, and
-          commercial reads. My voice has been described as versatile, grounded, and expressive.
-          I bring emotion and precision to every project, ensuring clear and professional results.
-        </p>
+      <!-- About -->
+      <section>
+        <div class="section-title">About</div>
+        <div class="card stack">
+          <p>
+            Versatile voice with clear articulation and grounded delivery. Experienced with character acting, commercial reads, and narration. Fast turnaround with clean, broadcast-ready audio.
+          </p>
+          <div class="list">
+            <div class="li">
+              <strong>Range</strong><br />
+              Warm mid-low, youthful to authoritative
+            </div>
+            <div class="li">
+              <strong>Accents</strong><br />
+              General American, light Southern, neutral
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section className="max-w-4xl mx-auto px-6 mb-24">
-        <h2 className="text-3xl font-semibold mb-6 border-b border-gray-700 pb-2">
-          Contact
-        </h2>
-        <p className="text-lg text-gray-300 mb-4">
-          Ready to collaborate or want to request a custom audition?
-        </p>
-        <a
-          href="mailto:yourname@email.com"
-          className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-6 py-3 rounded-lg transition"
-        >
-          Contact Me
-        </a>
+      <!-- Studio -->
+      <section>
+        <div class="section-title">Studio Specs</div>
+        <div class="card list">
+          <div class="li"><strong>Mic</strong><br />UA Sphere LX or equivalent LDC</div>
+          <div class="li"><strong>Interface</strong><br />Apollo Twin X or comparable</div>
+          <div class="li"><strong>Chain</strong><br />Clean, minimal noise floor</div>
+          <div class="li"><strong>Delivery</strong><br />WAV 48 kHz 24-bit, or per spec</div>
+        </div>
       </section>
 
-      <footer className="text-center py-10 border-t border-gray-800 text-gray-500">
-        <p>© {new Date().getFullYear()} Bailey Doyal | Voice Acting Portfolio</p>
-      </footer>
+      <!-- Contact -->
+      <section id="contact">
+        <div class="section-title">Contact</div>
+        <div class="card stack">
+          <p class="muted">Project in mind or want a custom audition</p>
+          <div>
+            <a class="btn" href="mailto:yourname@email.com">Email Me</a>
+          </div>
+          <p class="muted">Response within one business day.</p>
+        </div>
+      </section>
     </main>
-  );
-}
 
-render(<VoiceActingPortfolio />);
+    <footer>
+      © {year} Bailey Doyal • Voice Acting Portfolio
+    </footer>
+  </body>
+</html>
