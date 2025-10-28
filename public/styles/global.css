@@ -397,10 +397,20 @@ main { padding: 2rem 1rem; }
   text-overflow: unset;
 }
 
-/* Preserve your services centering and layout */
+/* --- Center services pill container and keep pills centered --- */
 .services {
   text-align: center;
 }
-.pill-list {
-  justify-content: center;
+
+.services .pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* centers the pills horizontally */
+  align-items: center;      /* vertically aligns if they wrap */
+  gap: 0.5rem;
+  max-width: 800px;         /* keeps it nicely contained */
+  margin: 0 auto;           /* centers the entire group */
+  padding: 0;
+  list-style: none;
 }
+
