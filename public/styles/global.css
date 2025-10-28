@@ -59,38 +59,101 @@ main { padding: 2rem 1rem; }
 .demos-preview {
   display: flex;
   flex-direction: column;
-  align-items: center;      /* centers all child elements */
+  align-items: center;
   justify-content: center;
-  max-width: 100%;
   margin: 2rem auto;
   padding: 0 1rem;
   text-align: center;
 }
 
-.demos-preview .demo-player {
-  align-items: center;
-  background: var(--bg-alt);         /* slightly darker than the card */
-  border: 1px solid var(--border);   /* keeps subtle outline */
-  padding: 0.4rem 0.6rem;            /* smaller padding inside */
-  border-radius: 0.6rem;            /* less rounded corners */
-  max-width: 800px;                  /* narrower box width */
-  margin: 0 auto;                    /* centered horizontally */
-  margin: 1rem 0;  /* small vertical margin to add extra space between cards */
-}
-
-@media (max-width: 600px) {
-  .demos-preview .demo-player {
-    max-width: 100%;                 /* full width on mobile */
-    padding: 1rem;
-  }
-}
 .demos-preview .demos-grid {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  width: 100%;
+  max-width: 520px;        /* total width of the demo column */
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+/* Each demo card */
+.demos-preview .demo-player {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  padding: 0.6rem 0.8rem;
+  width: 100%;
+  max-width: 520px;
+  height: 80px;            /* fixed uniform height */
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Make sure inner layout fits properly */
+.demos-preview .demo-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0; /* prevents flex overflow */
+}
+
+/* Align text and controls neatly */
+.demos-preview .demo-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.demos-preview .demo-progress {
+  position: relative;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.demos-preview .demo-bar {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  border-radius: 999px;
+  transform: translateY(-50%);
+}
+
+.demos-preview .demo-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Volume & download stay aligned and scaled */
+.demos-preview .demo-right {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.demos-preview .demo-volume {
+  width: 90px;
+  height: 4px;
 }
 /* Make demo cards vertical on the homepage */
 .demos-grid {
