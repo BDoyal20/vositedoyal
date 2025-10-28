@@ -1,0 +1,14 @@
+---
+interface Props {
+  title: string;
+  src: string;
+}
+const { title, src } = Astro.props;
+---
+<div class="demo-player">
+  <button class="play" data-demo-src={src} aria-label={`Play ${title}`}>
+    ▶ Play
+  </button>
+  <span class="demo-title">{title}</span>
+  <audio preload="none" src={src} controls></audio>
+</div>
