@@ -474,3 +474,16 @@ main { padding: 2rem 1rem; }
   color: var(--text);
   background: var(--bg-alt);
 }
+
+.demo-player {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
