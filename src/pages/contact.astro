@@ -18,8 +18,8 @@ import SiteFooter from '../components/SiteFooter.astro';
       <li><strong>Facebook:</strong> <a href="https://facebook.com/" target="_blank" rel="noopener">facebook.com</a></li>
     </ul>
 
-    <!-- Optional: simple embedded form via formspree or similar service -->
-    <form class="contact-form" action="https://formspree.io/f/your-id" method="POST">
+    <!-- Formspree -->
+    <form class="contact-form" action="https://formspree.io/f/mblpglrr" method="POST">
       <label>
         Your name
         <input type="text" name="name" required />
@@ -32,6 +32,11 @@ import SiteFooter from '../components/SiteFooter.astro';
         Message
         <textarea name="message" rows="5" required></textarea>
       </label>
+
+      <!-- optional extras -->
+      <input type="hidden" name="_subject" value="New VO inquiry from website" />
+      <!-- <input type="hidden" name="_redirect" value="https://your-domain.com/thanks" /> -->
+
       <button class="btn primary" type="submit">Send</button>
     </form>
   </section>
