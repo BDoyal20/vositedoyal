@@ -24,9 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ===== Uniform Demo Player =====
+  // ===== Uniform Demo Player with draggable thumb =====
   const players = Array.from(document.querySelectorAll('[data-demo]'));
-
   const fmt = (t) => {
     if (!isFinite(t) || t < 0) t = 0;
     const m = Math.floor(t / 60);
@@ -50,13 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const audio = container.querySelector('audio');
     const seek = container.querySelector('.demo-seek');
     const bar = container.querySelector('[data-bar]');
+    const thumb = container.querySelector('[data-thumb]');
 
-    if (audio && seek && bar) {
+    if (audio && seek && bar && thumb) {
       const dur = isFinite(audio.duration) ? audio.duration : 0;
       const cur = isFinite(audio.currentTime) ? audio.currentTime : 0;
       const pct = dur > 0 ? (cur / dur) * 100 : 0;
       seek.value = String(pct);
       bar.style.width = `${pct}%`;
+      thumb.style.left = `${pct}%`;
       if (time) time.textContent = `${fmt(cur)} / ${fmt(dur)}`;
     }
 
@@ -80,8 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const seek = container.querySelector('.demo-seek');
     const progress = container.querySelector('[data-progress]');
     const bar = container.querySelector('[data-bar]');
+    const thumb = container.querySelector('[data-thumb]');
 
-    if (!audio || !toggle || !seek || !progress || !bar) return;
+    if (!audio || !toggle || !seek || !progress || !bar || !thumb) return;
 
     // Toggle play/pause
     toggle.addEventListener('click', () => {
@@ -100,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateUI(container, 'paused');
     });
 
-    // Range input seek
+    // Keyboard-accessible range input
     seek.addEventListener('input', () => {
       if (!isFinite(audio.duration) || audio.duration === 0) return;
       const pct = Number(seek.value);
@@ -108,41 +110,54 @@ document.addEventListener('DOMContentLoaded', () => {
       updateUI(container, audio.paused ? 'paused' : 'playing');
     });
 
-    // Click-to-seek on the bar
+    // Helpers for click/drag seeking
     function seekFromClientX(clientX) {
       const rect = progress.getBoundingClientRect();
-      const x = clientX - rect.left;
-      const pct = Math.max(0, Math.min(1, x / rect.width));
+      const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
+      const pct = rect.width > 0 ? x / rect.width : 0;
       if (isFinite(audio.duration)) {
         audio.currentTime = pct * audio.duration;
-        updateUI(container, audio.paused ? 'paused' : 'playing');
+        // Live UI follow
+        const pct100 = pct * 100;
+        bar.style.width = `${pct100}%`;
+        thumb.style.left = `${pct100}%`;
+        const time = container.querySelector('[data-time]');
+        if (time) time.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
       }
     }
 
+    // Click-to-seek
     progress.addEventListener('click', (e) => {
       seekFromClientX(e.clientX);
     });
 
-    // Drag-to-seek with Pointer Events
+    // Drag-to-seek using Pointer Events
     let dragging = false;
+    let activeId = null;
 
     function onPointerMove(e) {
       if (!dragging) return;
       seekFromClientX(e.clientX);
     }
     function onPointerUp() {
+      if (!dragging) return;
       dragging = false;
-      progress.releasePointerCapture?.(activeId);
-      activeId = null;
+      if (activeId != null) {
+        progress.releasePointerCapture?.(activeId);
+        activeId = null;
+      }
       document.body.style.userSelect = '';
+      document.body.style.cursor = '';
+      // Final UI sync
+      updateUI(container, audio.paused ? 'paused' : 'playing');
     }
 
-    let activeId = null;
     progress.addEventListener('pointerdown', (e) => {
       dragging = true;
       activeId = e.pointerId;
       progress.setPointerCapture?.(activeId);
       document.body.style.userSelect = 'none';
+      document.body.style.cursor = 'ew-resize';
       seekFromClientX(e.clientX);
     });
     progress.addEventListener('pointermove', onPointerMove);
