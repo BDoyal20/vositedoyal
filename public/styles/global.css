@@ -60,9 +60,10 @@ main { padding: 2rem 1rem; }
   background: var(--bg-alt);         /* slightly darker than the card */
   border: 1px solid var(--border);   /* keeps subtle outline */
   padding: 0.4rem 0.6rem;            /* smaller padding inside */
-  border-radius: 0.35rem;            /* less rounded corners */
-  max-width: 480px;                  /* narrower box width */
+  border-radius: 0.6rem;            /* less rounded corners */
+  max-width: 800px;                  /* narrower box width */
   margin: 0 auto;                    /* centered horizontally */
+  margin: 0.25rem 0;  /* small vertical margin to add extra space between cards */
 }
 
 @media (max-width: 600px) {
@@ -78,6 +79,8 @@ main { padding: 2rem 1rem; }
   gap: 1.25rem;
   max-width: 600px;
   margin: 0 auto;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 @media (max-width: 900px) { .demos-grid { grid-template-columns: 1fr 1fr; } }
@@ -461,31 +464,4 @@ main { padding: 2rem 1rem; }
   border-radius: 0.4rem;
   color: var(--text);
   background: var(--bg-alt);
-}
-
-/* Home page alignment tweak */
-.demos-preview .demos-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-.demos-preview .demo-player {
-  margin: 0.25rem 0;  /* small vertical margin to add extra space between cards */
-  max-width: 800px;
-}
-
-.demo-player {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.75rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
 }
