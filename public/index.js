@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // ===== NAV =====
+  // Nav
   const navToggle = document.getElementById('nav-toggle');
   const navMenu = document.getElementById('nav-menu');
   if (navToggle && navMenu) {
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===== Smooth scroll =====
+  // Smooth scroll anchors
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
@@ -17,16 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
-      window.scrollTo({
-        top: target.getBoundingClientRect().top + window.scrollY - 64,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 64, behavior: 'smooth' });
     });
   });
 
-  // ===== DEMO PLAYERS =====
+  // Demo players
   const players = Array.from(document.querySelectorAll('[data-demo]'));
-
   const fmt = (t) => {
     if (!isFinite(t) || t < 0) t = 0;
     const m = Math.floor(t / 60);
@@ -45,9 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateUI(container, state) {
-    // If dragging, don't override current drag visuals
     if (container.dataset.dragging === 'true') return;
-
     const btn = container.querySelector('[data-action="toggle"]');
     const time = container.querySelector('[data-time]');
     const audio = container.querySelector('audio');
@@ -85,27 +79,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const thumb = container.querySelector('[data-thumb]');
     const seek = container.querySelector('.demo-seek');
     const time = container.querySelector('[data-time]');
+    const vol = container.querySelector('.demo-volume');
 
     if (!audio || !toggle || !progress || !bar || !thumb) return;
 
-    // --- Play / Pause ---
+    // Init volume
+    if (vol) {
+      const v = Math.max(0, Math.min(100, Number(vol.value) || 75));
+      audio.volume = v / 100;
+      vol.addEventListener('input', () => {
+        const val = Math.max(0, Math.min(100, Number(vol.value) || 0));
+        audio.volume = val / 100;
+      });
+    }
+
+    // Play / Pause
     toggle.addEventListener('click', () => {
       if (audio.paused) {
         pauseOthers(audio);
-        audio.play().catch((err) => console.warn('Playback error:', err));
+        audio.play().catch(() => {});
       } else {
         audio.pause();
       }
     });
 
-    // --- Stop ---
+    // Stop
     stop?.addEventListener('click', () => {
       audio.pause();
       audio.currentTime = 0;
       updateUI(container, 'paused');
     });
 
-    // --- Range input (keyboard access) ---
+    // Range seek (keyboard)
     seek?.addEventListener('input', () => {
       if (!isFinite(audio.duration)) return;
       const pct = Number(seek.value);
@@ -113,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateUI(container, audio.paused ? 'paused' : 'playing');
     });
 
-    // --- Click or drag seek ---
+    // Click/drag seek
     function seekFromClientX(clientX) {
       const rect = progress.getBoundingClientRect();
       const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
@@ -140,13 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.cursor = 'ew-resize';
       seekFromClientX(e.clientX);
     });
-
-    progress.addEventListener('pointermove', (e) => {
-      if (!dragging) return;
-      seekFromClientX(e.clientX);
-    });
-
-    progress.addEventListener('pointerup', () => {
+    progress.addEventListener('pointermove', (e) => { if (dragging) seekFromClientX(e.clientX); });
+    function endDrag() {
       if (!dragging) return;
       dragging = false;
       container.dataset.dragging = 'false';
@@ -157,26 +157,16 @@ document.addEventListener('DOMContentLoaded', () => {
         activeId = null;
       }
       updateUI(container, audio.paused ? 'paused' : 'playing');
-    });
+    }
+    progress.addEventListener('pointerup', endDrag);
+    progress.addEventListener('pointercancel', endDrag);
+    progress.addEventListener('lostpointercapture', endDrag);
 
-    progress.addEventListener('pointercancel', () => {
-      dragging = false;
-      container.dataset.dragging = 'false';
-      document.body.style.userSelect = '';
-      document.body.style.cursor = '';
-    });
-
-    // --- Audio Events ---
+    // Audio events
     audio.addEventListener('loadedmetadata', () => updateUI(container, 'paused'));
     audio.addEventListener('timeupdate', () => updateUI(container, audio.paused ? 'paused' : 'playing'));
-    audio.addEventListener('play', () => {
-      pauseOthers(audio);
-      updateUI(container, 'playing');
-    });
+    audio.addEventListener('play', () => { pauseOthers(audio); updateUI(container, 'playing'); });
     audio.addEventListener('pause', () => updateUI(container, 'paused'));
-    audio.addEventListener('ended', () => {
-      audio.currentTime = 0;
-      updateUI(container, 'paused');
-    });
+    audio.addEventListener('ended', () => { audio.currentTime = 0; updateUI(container, 'paused'); });
   });
 });
