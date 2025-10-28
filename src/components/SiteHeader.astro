@@ -1,0 +1,24 @@
+---
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/demos', label: 'Demos' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+<nav class="site-nav">
+  <a class="brand" href="/">
+    <img src="/images/logo.png" alt="Logo" />
+    <span>Bailey Doyal • Voice Actor</span>
+  </a>
+  <button id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+  <ul id="nav-menu" class="menu">
+    {links.map((l) => (
+      <li><a href={l.href}>{l.label}</a></li>
+    ))}
+  </ul>
+</nav>
