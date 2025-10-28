@@ -352,48 +352,121 @@ main { padding: 2rem 1rem; }
   margin: -1px;
 }
 
-/* Controls row on each player */
-.demo-ctrls {
-  display: inline-flex;
+.demo-controls,
+.demo-right {
+  display: flex;
   align-items: center;
-  gap: .5rem;
-  margin-left: .25rem;
+  gap: 0.4rem;
 }
 
-/* Volume slider default */
+.demo-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.demo-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Compact progress bar */
+.demo-progress {
+  position: relative;
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 999px;
+}
+
+.demo-bar {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  pointer-events: none;
+}
+
+.demo-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--text);
+  border: 1px solid var(--border);
+  z-index: 2;
+}
+
+/* Volume slider */
 .demo-volume {
   -webkit-appearance: none;
   appearance: none;
-  width: 140px;
+  width: 90px;
   height: 4px;
-  background: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.15);
   border-radius: 999px;
   outline: none;
   cursor: pointer;
 }
 .demo-volume::-webkit-slider-thumb {
   -webkit-appearance: none;
-  appearance: none;
-  width: 14px; height: 14px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--text);
   border: 1px solid var(--border);
 }
 .demo-volume::-moz-range-thumb {
-  width: 14px; height: 14px; border-radius: 50%;
-  background: var(--text); border: 1px solid var(--border);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text);
+  border: 1px solid var(--border);
 }
 
-/* Download button matches small button */
+/* Download button */
 .demo-download {
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  color: var(--text);
+  background: var(--bg-alt);
 }
 
-/* Homepage compact tweaks */
-.demos-preview .demo-ctrls { gap: .4rem; }
-.demos-preview .demo-volume { width: 110px; height: 3px; }
-.demos-preview .demo-volume::-webkit-slider-thumb { width: 12px; height: 12px; }
-.demos-preview .demo-volume::-moz-range-thumb { width: 12px; height: 12px; }
+/* Home page alignment tweak */
+.demos-preview .demos-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.demo-player {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
