@@ -360,7 +360,13 @@ main { padding: 2rem 1rem; }
 }
 
 /* === SERVICES CENTERING === */
-
+/* Center section headers on index page */
+.demos-preview h2,
+.services h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+  
 .services {
   max-width: 1100px;
   margin: 3rem auto;
