@@ -153,3 +153,29 @@ hr {
   /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
   white-space: nowrap;
 }
+
+/* === FORCE-CENTER SERVICES PILL GROUP === */
+section.services {
+  text-align: center;
+}
+
+/* Center the UL itself */
+section.services > .pill-list {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center !important;
+  align-items: center;
+  align-content: center;
+  gap: 0.5rem;
+  max-width: 800px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;   /* remove default UL indent */
+  padding-right: 0 !important;
+  list-style: none;
+}
+
+/* Normalize LI so nothing offsets the row */
+section.services > .pill-list > li {
+  margin: 0 !important;
+}
