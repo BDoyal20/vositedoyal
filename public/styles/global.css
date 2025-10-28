@@ -527,13 +527,18 @@ main { padding: 2rem 1rem; }
 .demo-volume {
   -webkit-appearance: none;
   appearance: none;
-  width: 90px;
+  width: 100px;
   height: 4px;
-  background: rgba(255,255,255,0.15);
+  background: linear-gradient(90deg, var(--brand), var(--brand-2)); /* brighter color */
   border-radius: 999px;
   outline: none;
   cursor: pointer;
+  margin: 0;                 /* remove any inherited offset */
+  vertical-align: middle;    /* aligns visually with play/download buttons */
+  transform: translateY(1px); /* small correction to center vertically */
 }
+
+/* Chrome / Edge / Safari thumb styling */
 .demo-volume::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 12px;
@@ -541,13 +546,30 @@ main { padding: 2rem 1rem; }
   border-radius: 50%;
   background: var(--text);
   border: 1px solid var(--border);
+  transition: background 0.2s ease;
 }
+.demo-volume::-webkit-slider-thumb:hover {
+  background: var(--brand-2);
+}
+
+/* Firefox thumb styling */
 .demo-volume::-moz-range-thumb {
   width: 12px;
   height: 12px;
   border-radius: 50%;
   background: var(--text);
   border: 1px solid var(--border);
+  transition: background 0.2s ease;
+}
+.demo-volume::-moz-range-thumb:hover {
+  background: var(--brand-2);
+}
+
+/* Fix the track on Firefox to match the gradient */
+.demo-volume::-moz-range-track {
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  height: 4px;
+  border-radius: 999px;
 }
 
 /* Download button */
