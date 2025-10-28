@@ -63,13 +63,14 @@ main { padding: 2rem 1rem; }
   margin: 2rem auto;
   padding: 1rem 1rem;
   text-align: center;
+  gap: 1rem;
 }
 
 /* Column wrapper */
 .demos-preview .demos-grid {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 2rem;
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
