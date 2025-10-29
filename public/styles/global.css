@@ -377,6 +377,11 @@ main { padding: 2rem 1rem; }
   outline-offset: 3px;
 }
 
+.demo-btn:hover,
+.demo-btn.small:hover {
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
+}
+
 .demo-main {
   grid-area: main;
   display: grid;
