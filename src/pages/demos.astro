@@ -9,17 +9,40 @@ import DemoPlayer from '../components/DemoPlayer.astro';
     <SiteHeader />
   </Fragment>
 
-  <section class="container">
+  <!-- New Intro Section -->
+  <section class="container" style="text-align:center; max-width:850px;">
     <h1>Demos</h1>
-    <p style="color:var(--muted); margin-top:-.25rem;">Click Play to hear samples. Only one demo plays at a time.</p>
+    <p style="color:var(--muted); font-size:1.1rem; margin-bottom:1.5rem;">
+      When your project calls for a voice that’s genuine, adaptable, and full of character, Bailey Doyal is ready to deliver.
+      With a talent that spans commercials, promos, trailers, and dynamic characters for video games and animation,
+      Bailey brings energy and professionalism to every performance. Explore the samples below to hear his range and share them with your creative team.
+    </p>
 
+    <p style="color:var(--muted); font-size:1.1rem;">
+      Each demo captures a glimpse of Bailey’s distinctive tone and versatility, reflecting the emotion and precision he brings to every project.
+      For a custom audition or personalized quote, reach out using the contact section below.
+      Bailey takes pride in quick, reliable communication and will respond within 24 hours to help bring your vision to life.
+    </p>
+
+    <!-- Let's Collaborate Button -->
+    <div style="margin-top:2rem;">
+      <a href="/contact" class="btn primary">Let’s Collaborate</a>
+    </div>
+
+    <!-- Small divider before demos -->
+    <hr style="margin:3rem auto 2rem; max-width:600px; border:1px solid var(--border);" />
+    <p style="color:var(--muted); margin-top:-.25rem;">Click Play to hear samples. Only one demo plays at a time.</p>
+  </section>
+
+  <!-- Demo List -->
+  <section class="container">
     <div class="demos-list" style="display:grid; gap:1rem; margin-top:1rem;">
       <DemoPlayer title="Commercial" src="/audio/commercial_BaileyDoyal.mp3" />
       <DemoPlayer title="Narration" src="/audio/narration_BaileyDoyal.mp3" />
       <DemoPlayer title="Character" src="/audio/character_BaileyDoyal.mp3" />
       <DemoPlayer title="Promo" src="/audio/promo_BaileyDoyal.mp3" />
 
-      <!-- New entries. Replace filenames with your actual audio or upload these names -->
+      <!-- New entries -->
       <DemoPlayer title="eLearning" src="/audio/elearning_BaileyDoyal.mp3" />
       <DemoPlayer title="Corporate" src="/audio/corporate_BaileyDoyal.mp3" />
       <DemoPlayer title="Trailer" src="/audio/trailer_BaileyDoyal.mp3" />
