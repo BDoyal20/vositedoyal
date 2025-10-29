@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<BaseLayout title="Auditions • Bailey Doyal" description="Request a custom audition from Bailey Doyal. Provide direction, copy, and turnaround needs.">
+  <Fragment slot="header">
+    <SiteHeader />
+  </Fragment>
+
+  <section class="container" style="max-width:900px;">
+    <h1>Auditions</h1>
+    <p style="color:var(--muted); margin-top:-.25rem;">
+      Share your direction, copy, and timing needs. I respond within 24 hours.
+    </p>
+
+    <form class="contact-form" action="https://formspree.io/f/mblpglrr" method="POST" enctype="multipart/form-data">
+      <!-- Name -->
+      <div class="name-section" style="margin-bottom:1rem;">
+        <h4 style="margin-bottom:0.5rem;">Name <span style="color:#f87171;">*</span></h4>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <label style="display:flex; flex-direction:column;">
+            <input type="text" name="first_name" placeholder="First" required />
+          </label>
+          <label style="display:flex; flex-direction:column;">
+            <input type="text" name="last_name" placeholder="Last" required />
+          </label>
+        </div>
+      </div>
+
+      <!-- Company -->
+      <label>
+        Company Name
+        <input type="text" name="company" />
+      </label>
+
+      <!-- Email + Phone -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <label>
+          Email *
+          <input type="email" name="email" required />
+        </label>
+        <label>
+          Phone Number
+          <input type="tel" name="phone" />
+        </label>
+      </div>
+
+      <!-- Requested Turnaround -->
+      <label>
+        Requested Turn Around Time
+        <input type="text" name="turnaround" placeholder="e.g., 24 hours, 48 hours, 3–5 days" />
+      </label>
+
+      <!-- Direction / Instructions -->
+      <label>
+        Please provide direction / instructions for how you'd like me sound in this audition.
+        <small style="color:var(--muted);">
+          Feel free to reference any demos from my website if you are looking for a particular category or style
+          of voicing (friendly, conversational, authoritative, etc.).
+        </small>
+        <textarea name="direction" rows="4"></textarea>
+      </label>
+
+      <!-- Voiceover Copy -->
+      <label>
+        Please provide your voiceover copy here
+        <small style="color:var(--muted);">
+          You may provide the entire script or a portion if you want a custom audition.
+        </small>
+        <textarea name="voiceover_copy" rows="6" placeholder="Paste your script text here"></textarea>
+      </label>
+
+      <!-- Optional file upload -->
+      <label>
+        Upload File (PDF, DOC, DOCX, TXT)
+        <input type="file" name="script_file" accept=".pdf,.doc,.docx,.txt" />
+      </label>
+
+      <!-- Subject line for Formspree -->
+      <input type="hidden" name="_subject" value="New Audition Request from Website" />
+
+      <button class="btn primary" type="submit">Submit</button>
+    </form>
+  </section>
+
+  <Fragment slot="footer">
+    <SiteFooter />
+  </Fragment>
+</BaseLayout>
