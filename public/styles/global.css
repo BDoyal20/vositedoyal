@@ -339,36 +339,42 @@ main { padding: 2rem 1rem; }
   box-shadow: 0 6px 16px rgba(0,0,0,0.25);
 }
 
-.demo-btn {
-  grid-area: toggle;
+.demo-btn,
+.demo-btn.small {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  line-height: 1;
-  border-radius: .6rem;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text);
-  font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  color: #081019;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
-.demo-btn.small {
-  grid-area: stop;
-  width: 36px;
-  height: 36px;
-  line-height: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: .55rem;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text);
-  font-size: 14px;
-  align-self: center;
+/* Hover interaction */
+.demo-btn:hover,
+.demo-btn.small:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45), 0 0 10px rgba(96, 165, 250, 0.4);
+  background: linear-gradient(135deg, var(--brand-2), var(--brand));
+}
+
+/* Active press effect */
+.demo-btn:active,
+.demo-btn.small:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  opacity: 0.9;
+}
+
+/* Focus ring (accessibility) */
+.demo-btn:focus,
+.demo-btn.small:focus {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
 }
 
 .demo-main {
