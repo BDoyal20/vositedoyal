@@ -1,38 +1,36 @@
 ---
-import { SITE } from "../site";
-
-type Props = {
-  title?: string;
+interface Props {
+  title: string;
   description?: string;
-  image?: string;
-  canonical?: string;
-  noindex?: boolean;
-  ogType?: string; // "website" or "article"
-};
-
-const {
-  title,
-  description,
-  image = SITE.image,
-  canonical = `${SITE.base}${Astro.url.pathname}`,
-  noindex = false,
-  ogType = "website"
-} = Astro.props as Props;
-
-const pageTitle = title ?? SITE.title;
-const pageDesc = description ?? SITE.description;
+}
+const { title, description } = Astro.props;
 ---
-
-<!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta name="msvalidate.01" content="D1C1BF2CD5E4319D00EC47A95BD8C4E7" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href="/images/logo.png" />
+    <link rel="preload" as="image" href="/images/headshot.jpg" />
+    <link rel="stylesheet" href="/styles/global.css" />
+    <script defer type="module" src="/index.js"></script>
+  </head>
+  <body>
+    <header>
+      <slot name="header" />
+    </header>
 
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDesc} />
-    <meta name="robots" content={noindex ? "noindex, follow" : "index, follow"} />
-    <link rel="canonical" href={canonical} />
+    <main id="content">
+      <slot />
+    </main>
+
+    <footer>
+      <slot name="footer" />
+    </footer>
+  </body>
+</html>
 
     <!-- Open Graph -->
     <meta property="og:title" content={pageTitle} />
