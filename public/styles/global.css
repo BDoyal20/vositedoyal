@@ -499,3 +499,16 @@ main { padding: 2rem 1rem; }
 
 .contact-list { list-style: none; padding: 0; }
 .contact-list li { margin: .25rem 0; }
+
+.services {
+  text-align: center;
+}
+
+.services .pill-list {
+  justify-content: center;
+}
+.services .pill-list {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
