@@ -1,36 +1,57 @@
 ---
-interface Props {
-  title: string;
+import { SITE } from "../site";
+
+type Props = {
+  title?: string;
   description?: string;
-}
-const { title, description } = Astro.props;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+  ogType?: string; // "website" or "article"
+};
+
+const {
+  title,
+  description,
+  image = SITE.image,
+  canonical = `${SITE.base}${Astro.url.pathname}`,
+  noindex = false,
+  ogType = "website"
+} = Astro.props as Props;
+
+const pageTitle = title ?? SITE.title;
+const pageDesc = description ?? SITE.description;
 ---
+
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta name="msvalidate.01" content="D1C1BF2CD5E4319D00EC47A95BD8C4E7" />
-    <title>Bailey Doyal Voice Actor | Professional Voice Overs</title>
-    <meta name="description" content="Professional voice actor providing commercial, narration, promo, and character voiceovers with fast turnaround.">
-    <meta name="robots" content="index, follow">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    {description && <meta name="description" content={description} />}
-    <link rel="icon" href="/images/logo.png" />
-    <link rel="preload" as="image" href="/images/headshot.jpg" />
-    <link rel="stylesheet" href="/styles/global.css" />
-    <script defer type="module" src="/index.js"></script>
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <meta name="robots" content={noindex ? "noindex, follow" : "index, follow"} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    {SITE.twitter && <meta name="twitter:site" content={SITE.twitter} />}
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    <meta name="twitter:image" content={image} />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
-    <header>
-      <slot name="header" />
-    </header>
-
-    <main id="content">
-      <slot />
-    </main>
-
-    <footer>
-      <slot name="footer" />
-    </footer>
+    <slot />
   </body>
 </html>
