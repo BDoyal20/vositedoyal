@@ -339,22 +339,34 @@ main { padding: 2rem 1rem; }
   box-shadow: 0 6px 16px rgba(0,0,0,0.25);
 }
 
-.demo-btn,
-.demo-btn.small {
+/* ============================================
+   Demo Player Buttons (Play / Stop)
+   ============================================ */
+.demo-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
   cursor: pointer;
-  border-radius: 0.75rem;
+  border-radius: 0.9rem;
   border: 1px solid var(--border);
   background: linear-gradient(135deg, var(--brand), var(--brand-2));
   color: #081019;
   transition: all 0.2s ease-in-out;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  width: 60px;   /* increased size */
+  height: 60px;  /* increased size */
+  font-size: 1.4rem;
 }
 
-/* Hover interaction */
+/* Stop button (small variant, also larger now) */
+.demo-btn.small {
+  width: 50px;
+  height: 50px;
+  font-size: 1.2rem;
+}
+
+/* Hover and active states */
 .demo-btn:hover,
 .demo-btn.small:hover {
   transform: translateY(-2px);
@@ -362,7 +374,6 @@ main { padding: 2rem 1rem; }
   background: linear-gradient(135deg, var(--brand-2), var(--brand));
 }
 
-/* Active press effect */
 .demo-btn:active,
 .demo-btn.small:active {
   transform: translateY(1px);
@@ -370,17 +381,34 @@ main { padding: 2rem 1rem; }
   opacity: 0.9;
 }
 
-/* Focus ring (accessibility) */
+/* Focus ring */
 .demo-btn:focus,
 .demo-btn.small:focus {
   outline: 2px solid var(--brand);
   outline-offset: 3px;
 }
 
-.demo-btn:hover,
-.demo-btn.small:hover {
-  box-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
+/* ============================================
+   Keep Download Button Normal Size
+   ============================================ */
+.demo-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem; /* leave normal */
+  padding: 0.3rem 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  color: var(--text);
+  background: var(--bg-alt);
+  transition: color 0.2s ease, transform 0.2s ease;
 }
+
+.demo-download:hover {
+  color: var(--brand);
+  transform: scale(1.1);
+}
+
 
 .demo-main {
   grid-area: main;
