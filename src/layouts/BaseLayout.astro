@@ -31,23 +31,6 @@ const { title, description } = Astro.props;
     </footer>
   </body>
 </html>
-
-    <!-- Open Graph -->
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={pageDesc} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:type" content={ogType} />
-    <meta property="og:image" content={image} />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    {SITE.twitter && <meta name="twitter:site" content={SITE.twitter} />}
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={pageDesc} />
-    <meta name="twitter:image" content={image} />
-
-    <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
     <slot />
