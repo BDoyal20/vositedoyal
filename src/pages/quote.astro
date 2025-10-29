@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<BaseLayout title="Request a Quote • Bailey Doyal" description="Request a voice over quote from Bailey Doyal. Share project details, format, budget, and timeline.">
+  <Fragment slot="header">
+    <SiteHeader />
+  </Fragment>
+
+  <section class="container" style="max-width:900px;">
+    <h1>Request a Quote</h1>
+    <p style="color:var(--muted); margin-top:-.25rem;">
+      Fill out the form with as much detail as possible. I reply within 24 hours.
+    </p>
+
+    <!-- Quote form -->
+    <form class="contact-form" action="https://formspree.io/f/mblpglrr" method="POST" enctype="multipart/form-data">
+      <!-- Name -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <label>
+          Name * — First
+          <input type="text" name="first_name" required />
+        </label>
+        <label>
+          Name * — Last
+          <input type="text" name="last_name" required />
+        </label>
+      </div>
+
+      <!-- Company -->
+      <label>
+        Company Name
+        <input type="text" name="company" />
+      </label>
+
+      <!-- Email + Phone -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <label>
+          Email *
+          <input type="email" name="email" required />
+        </label>
+        <label>
+          Phone Number *
+          <input type="tel" name="phone" required />
+        </label>
+      </div>
+
+      <!-- Project Description -->
+      <label>
+        Project Description
+        <small style="color:var(--muted);">Examples: broadcast TV or radio spot, non-broadcast narration, phone prompts, etc.</small>
+        <textarea name="project_description" rows="4"></textarea>
+      </label>
+
+      <!-- Preferred audio format -->
+      <label>
+        Preferred audio format (WAV, AIFF, MP3, etc.)
+        <select name="audio_format">
+          <option value="">Select a format</option>
+          <option>WAV</option>
+          <option>AIFF</option>
+          <option>MP3</option>
+          <option>Other</option>
+        </select>
+      </label>
+
+      <!-- Budget + Word count -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <label>
+          Proposed budget for VO services
+          <input type="text" name="budget" placeholder="$" />
+        </label>
+        <label>
+          Word count of script / Estimated length
+          <input type="text" name="word_count_or_length" placeholder="e.g., 300 words or 60 seconds" />
+        </label>
+      </div>
+
+      <!-- Deadline -->
+      <label>
+        Deadline / timeline for completion
+        <input type="date" name="deadline" />
+      </label>
+
+      <!-- ISDN or phone patch -->
+      <fieldset style="border:1px solid var(--border); border-radius:.5rem; padding:.75rem;">
+        <legend>ISDN or phone patch session requested</legend>
+        <label style="display:inline-flex; align-items:center; gap:.4rem; margin-right:1rem;">
+          <input type="radio" name="isdn_or_phone_patch" value="Yes" />
+          Yes
+        </label>
+        <label style="display:inline-flex; align-items:center; gap:.4rem;">
+          <input type="radio" name="isdn_or_phone_patch" value="No" />
+          No
+        </label>
+      </fieldset>
+
+      <!-- Additional info -->
+      <label>
+        What else would you like to tell me about this project?
+        <textarea name="additional_details" rows="4"></textarea>
+      </label>
+
+      <!-- Voiceover copy -->
+      <label>
+        Please provide your voiceover copy here
+        <textarea name="voiceover_copy" rows="6" placeholder="Paste your script text here"></textarea>
+      </label>
+
+      <!-- Optional file upload of script -->
+      <label>
+        Or upload your script file (PDF, DOC, DOCX, TXT)
+        <input type="file" name="script_file" accept=".pdf,.doc,.docx,.txt" />
+      </label>
+
+      <!-- Subject line for Formspree -->
+      <input type="hidden" name="_subject" value="New Quote Request from Website" />
+
+      <button class="btn primary" type="submit">Request Quote</button>
+    </form>
+  </section>
+
+  <Fragment slot="footer">
+    <SiteFooter />
+  </Fragment>
+</BaseLayout>
