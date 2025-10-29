@@ -522,6 +522,25 @@ main { padding: 2rem 1rem; }
     grid-template-columns: 1fr;
   }
 }
+.contact-footer {
+  background: var(--bg-alt);
+  padding: 3rem 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.contact-footer h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.contact-footer a {
+  color: var(--brand);
+}
+
+.contact-footer .btn.primary {
+  margin-top: 1rem;
+}
+
 
 /* =====
    Forms
