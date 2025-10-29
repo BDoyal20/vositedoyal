@@ -17,16 +17,18 @@ import SiteFooter from '../components/SiteFooter.astro';
 
     <!-- Quote form -->
     <form class="contact-form" action="https://formspree.io/f/mblpglrr" method="POST" enctype="multipart/form-data">
+      
       <!-- Name -->
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
-        <label>
-          Name * — First
-          <input type="text" name="first_name" required />
-        </label>
-        <label>
-          Name * — Last
-          <input type="text" name="last_name" required />
-        </label>
+      <div class="name-section" style="margin-bottom:1rem;">
+        <h4 style="margin-bottom:0.5rem;">Name <span style="color:#f87171;">*</span></h4>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <label style="display:flex; flex-direction:column;">
+            <input type="text" name="first_name" placeholder="First" required />
+          </label>
+          <label style="display:flex; flex-direction:column;">
+            <input type="text" name="last_name" placeholder="Last" required />
+          </label>
+        </div>
       </div>
 
       <!-- Company -->
@@ -50,7 +52,7 @@ import SiteFooter from '../components/SiteFooter.astro';
       <!-- Project Description -->
       <label>
         Project Description
-        <small style="color:var(--muted);">Examples: broadcast TV or radio spot, non-broadcast narration, phone prompts, etc.</small>
+        <small style="color:var(--muted);">Examples: broadcast TV/radio spot, non-broadcast narration, phone prompts, etc.</small>
         <textarea name="project_description" rows="4"></textarea>
       </label>
 
@@ -109,7 +111,7 @@ import SiteFooter from '../components/SiteFooter.astro';
         <textarea name="voiceover_copy" rows="6" placeholder="Paste your script text here"></textarea>
       </label>
 
-      <!-- Optional file upload of script -->
+      <!-- Optional file upload -->
       <label>
         Or upload your script file (PDF, DOC, DOCX, TXT)
         <input type="file" name="script_file" accept=".pdf,.doc,.docx,.txt" />
